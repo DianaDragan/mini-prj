@@ -1,0 +1,26 @@
+div#toast-add{
+    position: absolute;
+    background: #48B791;
+    color: white;
+    right: 0px;
+    padding-left: 15px;
+    padding-right: 10px;
+    font-size: larger;
+    
+    visibility: hidden;
+    
+}
+
+div#toast-err{
+    position: absolute;
+    background:#DD482D;
+    color: white;
+    right: 0px;
+    padding-left: 15px;
+    padding-right: 10px;
+    font-size: larger;
+    
+    visibility: hidden;
+
+    
+}
