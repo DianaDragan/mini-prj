@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Project</title>
+    <link rel="stylesheet" href="css/grid.css">
+    <script src="js/member-container.js" defer></script>
+    <script src="js/add-delete.js" defer></script>
+    <script src="js/edit.js" defer></script>
+    <script src="js/toast.js" defer></script>
+
+
+</head>
+<body>
+<div class="grid-container">
+    <nav>
+        <p>Sport club members</p>
+    </nav>
+
+    <aside class="members-container">
+        <!-- <div class="member-card">
+            <div class="icon" > <h1>D</h1> </div>
+            <div class="member-data">
+                <p class="member-name">
+                    Name
+                </p>
+                <p class="member-details">
+                    ID
+                </p>
+                <p class="member-details">
+                    email
+                </p>
+            </div>
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button> -->
+    </aside>
+
+    <section class="add">
+        <div id="toast-add"> &#10004; User added successfully</div>
+        <div class="add-member">
+            <p>Add new member</p>
+            <hr>
+            <div class="form">
+                <form method="post" id="add-form">
+                    <div class="form-section1">
+                        <div>
+                        <label id="label-firstName" for="fname">First name</label>
+                        <input type="text" id="firstName" name="firstname" required>
+                        </div>
+                        <div> 
+                        <label id="label-lastName" for="lname">Last name</label>
+                        <input type="text" id="lastName" name="lastname" required>
+                        </div>
+                    </div>
+                    <div class="form-section2">
+                        <div>
+                        <label id="label-adress"for="adress">Adress</label>
+                        <input type="text" id="adress" name="adress" required ></div>
+                        <div>
+                        <label id="label-zip" for="zipcode">Zip code</label>
+                        <input type="number" id="zip" name="zipcode" required></div>
+                        <div>
+                        <label id="label-city" for="city">City</label>
+                        <input type="text" id="city" name="city" required></div>
+                        <div>
+                        <label id="label-country" for="country">Country</label>
+                        <input type="text" id="country" name="country" required></div>
+                    </div>
+                    <div class="form-section3">
+                        <div>
+                        <label id="label-gender" for="gender">Gender</label>
+                        <select id="gender" name="gender">
+                            <option value="not specified">not specified</option>
+                            <option value="female">female</option>
+                            <option value="male">male</option>
+                        </select> </div>
+                        <div>
+                        <label id="label-age" for="age">Age</label>
+                        <input type="number" id="age" name="age" required></div>
+          
+                        <div >
+                            <label id="label-activity" for="activity">Activity class</label>
+                            <div class="activity-class">
+                            <input type="radio" id="activityChoice1" name="activity" value="professional">
+                            <label for="activityChoice1">professional</label>
+    
+                            <input type="radio" id="activityChoice2" name="activity" value="amateur">
+                            <label for="activityChoice2">amateur</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <div class="form-section4 ">
+                        <label id="label-practice" for="activity">Practiced sports</label>
+                        <div class="checkbox-div">
+                        <input type="checkbox" name="sports" value="running">
+                        <label for="sportsChoice1">running</label>
+                        
+                        <input type="checkbox"  name="sports" value="cycling">
+                        <label for="sportsChoice2">cycling</label>
+          
+                        <input type="checkbox"  name="sports" value="swimming">
+                        <label for="sportsChoice3">swimming</label>
+          
+                        <input type="checkbox"  name="sports" value="walking">
+                        <label for="sportsChoice4">walking</label>
+          
+                        <input type="checkbox"  name="sports" value="skiing">
+                        <label for="sportsChoice5">skiing</label>
+                        </div>
+                        
+                        </div>
+                        <button class="save add-member" type="submit">  Save </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    
+    </section >
+
+    <section class="edit">
+        <div class="edit-member"> 
+        <div id="toast-err"> &#10060; Error while updating member</div>
+            <p>Edit member</p>
+            <hr>
+            <div class="form">
+            <form method="post" id="edit-form" data-memberid="">
+                <div class="form-section1">
+                    <div>
+                    <label id="label-firstName" for="fname">First name</label>
+                    <input type="text" id="edit-firstName" name="firstname" >
+                    </div>
+                    <div> 
+                    <label id="label-lastName" for="lname">Last name</label>
+                    <input type="text" id="edit-lastName" name="lastname" >
+                    </div>
+                </div>
+                <div class="form-section2">
+                    <div>
+                    <label id="label-adress"for="adress">Adress</label>
+                    <input type="text" id="edit-adress" name="adress" ></div>
+                    <div>
+                    <label id="label-zip" for="zipcode">Zip code</label>
+                    <input type="number" id="edit-zip" name="zipcode" ></div>
+                    <div>
+                    <label id="label-city" for="city">City</label>
+                    <input type="text" id="edit-city" name="city" ></div>
+                    <div>
+                    <label id="label-country" for="country">Country</label>
+                    <input type="text" id="edit-country" name="country" ></div>
+                </div>
+                <div class="form-section3">
+                    <div>
+                    <label id="label-gender" for="gender">Gender</label>
+                    <select id="edit-gender" name="gender">
+                        <option value="not specified">not specified</option>
+                        <option value="female">female</option>
+                        <option value="male">male</option>
+                    </select> </div>
+                    <div>
+                    <label id="label-age" for="age">Age</label>
+                    <input type="number" id="edit-age" name="age" ></div>
+      
+                    <div >
+                        <label id="label-activity" for="activity">Activity class</label>
+                        <div class="activity-class">
+                        <input type="radio"  name="edit-activity" value="professional">
+                        <label for="activityChoice1">professional</label>
+    
+                        <input type="radio"  name="edit-activity" value="amateur">
+                        <label for="activityChoice2">amateur</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="form-section4 ">
+                    <label id="label-practice" for="activity">Practiced sports</label>
+                    <div class="checkbox-div">
+                    <input type="checkbox" name="edit-sports" value="running">
+                    <label for="sportsChoice1">running</label>
+                    
+                    <input type="checkbox"  name="edit-sports" value="cycling">
+                    <label for="sportsChoice2">cycling</label>
+      
+                    <input type="checkbox"  name="edit-sports" value="swimming">
+                    <label for="sportsChoice3">swimming</label>
+      
+                    <input type="checkbox"  name="edit-sports" value="walking">
+                    <label for="sportsChoice4">walking</label>
+      
+                    <input type="checkbox"  name="edit-sports" value="skiing">
+                    <label for="sportsChoice5">skiing</label>
+                    </div>
+                    
+                    </div>
+                    <button class="update edit-member" type="submit"> Update </button>
+                </div>
+                
+                
+            </form>
+        </div>
+        </div>
+    </section>
+
+    <footer>
+        <ul>
+            <li>Recent news</li>
+            <li>About Us</li>
+            <li>Services</li>
+            <li>Contact us</li>
+        </ul>
+    </footer>
+
+</div>
+</body>
+</html>
