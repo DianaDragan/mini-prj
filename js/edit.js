@@ -19,23 +19,23 @@ function editPerson(id) {
             return res.json()})
         .then(data => {
             console.log(data);
-            memberInformation=data;
+            personInformation=data;
             populateEdit.setAttribute("data-memberid",id);
-            populateEditForm(memberInformation);
+            populateEditForm(personInformation);
 
     })
         .catch(error => console.log(error))
 }
 
-function populateEditForm(member){
-    populateEdit.querySelector("#edit-firstName").value=member.firstName;
-    populateEdit.querySelector("#edit-lastName").value=member.lastName;
-    populateEdit.querySelector("#edit-adress").value=member.address.streetAndNumber;
-    populateEdit.querySelector("#edit-zip").value=member.address.postalCode;
-    populateEdit.querySelector("#edit-city").value=member.address.city;
-    populateEdit.querySelector("#edit-country").value=member.address.country;
-    populateEdit.querySelector("#edit-gender").value=member.gender;
-    populateEdit.querySelector("#edit-age").value=member.age;
+function populateEditForm(person){
+    const fields1=['firstName','lastName','gender','age'];
+    const fields2=['city','country'];
+
+    fields1.forEach(name =>  populateEdit.querySelector(`#edit-${name}`).value = person[name]);
+    fields2.forEach(name =>  populateEdit.querySelector(`#edit-${name}`).value = person.address[name]);
+
+    populateEdit.querySelector("#edit-adress").value=person.address.streetAndNumber;
+    populateEdit.querySelector("#edit-zip").value=person.address.postalCode;
 
     let radioboxes = document.querySelectorAll('input[name="edit-activity"]');
     radioboxes.forEach((radiobox) => {
@@ -60,34 +60,45 @@ function populateEditForm(member){
 
 updateForm.addEventListener('submit', (e)=>{
     e.preventDefault();
-    memberInformation=null;
-    getMemberInfoFromForm('edit');
-    memberInformation.id=populateEdit.dataset.memberid;
+    personInformation=null;
+    getPersonInfoFromForm('edit');
+    personInformation.id=populateEdit.dataset.memberid;
 
-    fetch('http://127.0.0.1:3000/users/'+memberInformation.id, {
-        method: 'PUT',
-        headers: {
-            'Content-type': 'application/json'
-        },
-        body: JSON.stringify(memberInformation)
-        })
-        .then(res => {
-            if (res.ok) { 
-                let singleMemberCard=document.querySelector(`.member-card[data-id='${memberInformation.id}']`);
-                singleMemberCard.outerHTML= renderPerson(memberInformation) ;
-                populateEdit.reset();
+    saveEditPerson(personInformation)
+        .then(() => saveEditPerson(personInformation))
+        .then(() => updateCard(personInformation))
+        .catch(error => console.error('Error:', error)) 
 
-                console.log("HTTP request successful");
-
-            }else { 
-                showToast(1);
-                console.log("HTTP request unsuccessful") 
-            }
-            return res
-        })
-        .then(function(res){ 
-            return res.json()
-        })
-        .catch(error => console.log(error))
-
+        populateEdit.reset();
  })
+
+
+async function saveEditPerson(personInformation){
+
+    fetch('http://127.0.0.1:3000/users/'+personInformation.id, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(personInformation)
+            })
+            .then(res => {
+                if (res.ok) { 
+                    console.log("HTTP request successful");
+                }else { 
+                    showToast(1);
+                    console.log("HTTP request unsuccessful") 
+                }
+                return res
+            })
+            .then(function(res){ 
+                return res.json()
+            })
+            .catch(error => console.log(error))
+ }
+
+function updateCard(personInformation){
+    let singleMemberCard=document.querySelector(`.member-card[data-id='${personInformation.id}']`);
+    singleMemberCard.outerHTML= renderPerson(personInformation) ;
+    
+ }
