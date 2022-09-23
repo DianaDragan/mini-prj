@@ -1,15 +1,26 @@
 let persons=[];
 let memberCard= document.querySelector('.members-container');
 
-initPersons();
+function initListeners(){
+    memberCard.addEventListener('click', (e) =>{
+        if(e.target.classList.contains("edit-member")){
+            editPerson(e.target.parentElement.dataset.id);
+        }
+    
+        if(e.target.classList.contains("delete-member")){
+            deletePerson(e.target.parentElement);
 
+        }
+    })
+}
 
-async function initPersons(){
+async function getPersons(){
     let response = await fetch('http://127.0.0.1:3000/users')
     let personsResponse= await response.json();
     persons = personsResponse;
-    renderPersons();
+    //renderPersons();
 }
+getPersons().then( ()=>renderPersons());
 
 function renderPersons(){
     persons.forEach(person => {
